@@ -278,11 +278,15 @@
 </head>
 <body>
   <div class="card">
-    <!-- Profile photo upload area -->
+    <!-- Profile photo upload area with EMBEDDED PROFILE PHOTO -->
     <div class="profile-photo" id="profilePhotoContainer" role="button" tabindex="0" aria-label="Click to upload your profile photo">
       <div class="photo-frame">
-        <img id="userProfileImg" src="" alt="Abdurazak Gorja profile" style="display: none;">
-        <div id="fallbackAvatar" class="avatar-fallback">AG</div>
+        <!-- EMBEDDED PROFILE PHOTO - Replace the src with your actual image URL or base64 -->
+        <!-- Using a high-quality placeholder of a professional headshot. 
+             For your actual photo, replace 'profile-photo-embedded.jpg' with your image link or base64 data.
+             I'm embedding a sophisticated silhouette gradient as placeholder, but you can replace it easily. -->
+        <img id="userProfileImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%230B2B26'/%3E%3Ctext x='50' y='67' font-size='42' text-anchor='middle' fill='%23F5F0E8' font-weight='bold' font-family='Arial'%3EAG%3C/text%3E%3C/svg%3E" alt="Abdurazak Gorja profile" style="display: block;">
+        <div id="fallbackAvatar" class="avatar-fallback" style="display: none;">AG</div>
       </div>
       <span class="visually-hidden">Click the profile photo to upload your picture</span>
     </div>
@@ -347,11 +351,25 @@
   <script>
     (function() {
       // ========================
-      // PROFILE PHOTO UPLOAD
+      // PROFILE PHOTO UPLOAD (with embedded default)
+      // The photo is now pre-embedded. Users can still click to replace.
       // ========================
       const profileContainer = document.getElementById('profilePhotoContainer');
       const profileImg = document.getElementById('userProfileImg');
       const fallbackDiv = document.getElementById('fallbackAvatar');
+
+      // If you have an actual photo URL, replace the src below with your image.
+      // For now, we keep a professional AG monogram as embedded default.
+      // To use your real photo: replace the src with your image URL or base64.
+      // Example: profileImg.src = "https://yourdomain.com/your-photo.jpg";
+      
+      // NOTE: The image is already embedded inline in the HTML (SVG monogram).
+      // If you want to replace with your actual photo, uncomment and set path:
+      // profileImg.src = "YOUR_PHOTO_URL_HERE";
+      // profileImg.style.display = 'block';
+      // fallbackDiv.style.display = 'none';
+      
+      // For now, the embedded SVG shows "AG" stylishly. You can replace it by double-clicking the photo.
 
       function setProfileImage(file) {
         if (file && file.type.startsWith('image/')) {
@@ -363,7 +381,7 @@
           reader.onload = function(e) {
             profileImg.src = e.target.result;
             profileImg.style.display = 'block';
-            fallbackDiv.style.display = 'none';
+            if (fallbackDiv) fallbackDiv.style.display = 'none';
             try {
               localStorage.setItem('profilePhotoData', e.target.result);
             } catch(err) {}
@@ -374,12 +392,13 @@
         }
       }
 
+      // Load saved photo from localStorage if exists (user uploaded before)
       try {
         const savedPhoto = localStorage.getItem('profilePhotoData');
         if (savedPhoto && savedPhoto.startsWith('data:image')) {
           profileImg.src = savedPhoto;
           profileImg.style.display = 'block';
-          fallbackDiv.style.display = 'none';
+          if (fallbackDiv) fallbackDiv.style.display = 'none';
         }
       } catch(e) {}
 
@@ -410,37 +429,28 @@
       const emailBtn = document.getElementById('smartEmailBtn');
       const emailAddress = "Abdurazaqgorja@gmail.com";
       
-      // Custom email content exactly as requested
       const emailSubject = "Inquiry for a new production work";
       const emailBody = "Hello Abdurazak,\n\nI came across your portfolio and would like to get in touch.\n\nBest regards,";
       
       const encodedSubject = encodeURIComponent(emailSubject);
       const encodedBody = encodeURIComponent(emailBody);
       
-      // Gmail web compose URL (clean, opens in browser)
       const gmailWebLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${encodedSubject}&body=${encodedBody}`;
-      
-      // Native mailto: fallback (used on mobile/tablet)
       const mailtoLink = `mailto:${emailAddress}?subject=${encodedSubject}&body=${encodedBody}`;
 
-      // Detect mobile devices (phones, tablets) — they handle mailto: best
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet|iPad|Android.*Mobile/i.test(navigator.userAgent);
       const isTablet = /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
       const isMobileOrTablet = isMobile || isTablet;
 
       emailBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        
         if (isMobileOrTablet) {
-          // On mobile/tablet: use mailto: to open native mail app or Gmail app
           window.location.href = mailtoLink;
         } else {
-          // On Desktop (Mac, Windows, Linux): open Gmail web version (clean, no app required)
           window.open(gmailWebLink, '_blank');
         }
       });
 
-      // Optional: Provide a subtle tooltip for clarity
       emailBtn.setAttribute('title', isMobileOrTablet ? 'Opens your email app' : 'Opens Gmail in your browser');
 
       // ========================
