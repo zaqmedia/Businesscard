@@ -42,52 +42,44 @@
     }
 
     /* Profile photo */
-    <style>
-.profile-photo {
-  width: 108px;
-  height: 108px;
-  margin: 0 auto 1.2rem;
-  cursor: pointer;
-  position: relative;
-}
+    .profile-photo {
+      width: 108px;
+      height: 108px;
+      margin: 0 auto 1.2rem;
+      cursor: pointer;
+      position: relative;
+    }
 
-.photo-frame {
-  width: 100%;
-  height: 100%;
-  background: #E8E0D4;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 3px solid #0B2B26;
-  box-shadow: 0 12px 24px rgba(11, 43, 38, 0.12);
-  transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-}
+    .photo-frame {
+      width: 100%;
+      height: 100%;
+      background: #E8E0D4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 3px solid #0B2B26;
+      box-shadow: 0 12px 24px rgba(11, 43, 38, 0.12);
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
 
-.photo-frame:active {
-  transform: scale(0.98);
-}
+    .photo-frame:active {
+      transform: scale(0.98);
+    }
 
-@media (hover: hover) {
-  .photo-frame:hover {
-    transform: scale(1.02);
-    box-shadow: 0 16px 28px rgba(11, 43, 38, 0.18);
-  }
-}
+    @media (hover: hover) {
+      .photo-frame:hover {
+        transform: scale(1.02);
+        box-shadow: 0 16px 28px rgba(11, 43, 38, 0.18);
+      }
+    }
 
-.photo-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>
-
-<div class="profile-photo" id="profilePhotoContainer">
-  <div class="photo-frame">
-    <img id="userProfileImg" src="https://raw.githubusercontent.com/zaqmedia/Zaqresume/main/abdurazak-profile.jpg" alt="Abdurazak Gorja">
-  </div>
-</div>
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
     .avatar-fallback {
       background: #0B2B26;
@@ -286,14 +278,24 @@
 </head>
 <body>
   <div class="card">
-    <!-- Profile photo upload area with EMBEDDED PROFILE PHOTO -->
+    <!-- PROFILE PHOTO SECTION - READY FOR YOUR PHOTO -->
     <div class="profile-photo" id="profilePhotoContainer" role="button" tabindex="0" aria-label="Click to upload your profile photo">
       <div class="photo-frame">
-        <!-- EMBEDDED PROFILE PHOTO - Replace the src with your actual image URL or base64 -->
-        <!-- Using a high-quality placeholder of a professional headshot. 
-             For your actual photo, replace 'profile-photo-embedded.jpg' with your image link or base64 data.
-             I'm embedding a sophisticated silhouette gradient as placeholder, but you can replace it easily. -->
-        <img id="userProfileImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%230B2B26'/%3E%3Ctext x='50' y='67' font-size='42' text-anchor='middle' fill='%23F5F0E8' font-weight='bold' font-family='Arial'%3EAG%3C/text%3E%3C/svg%3E" alt="Abdurazak Gorja profile" style="display: block;">
+        <!-- =============================================================== -->
+        <!-- OPTION 1: Use a GitHub raw URL (replace URL with yours)        -->
+        <!-- =============================================================== -->
+        <img id="userProfileImg" src="https://raw.githubusercontent.com/zaqmedia/Zaqresume/main/abdurazak-profile.jpg" alt="Abdurazak Gorja profile" style="display: block;">
+        
+        <!-- =============================================================== -->
+        <!-- OPTION 2: Use Base64 (uncomment and use instead of above)      -->
+        <!-- =============================================================== -->
+        <!-- <img id="userProfileImg" src="data:image/jpeg;base64,YOUR_BASE64_STRING_HERE" alt="Abdurazak Gorja profile" style="display: block;"> -->
+        
+        <!-- =============================================================== -->
+        <!-- OPTION 3: Use any direct image URL                              -->
+        <!-- =============================================================== -->
+        <!-- <img id="userProfileImg" src="https://your-image-url.com/photo.jpg" alt="Abdurazak Gorja profile" style="display: block;"> -->
+        
         <div id="fallbackAvatar" class="avatar-fallback" style="display: none;">AG</div>
       </div>
       <span class="visually-hidden">Click the profile photo to upload your picture</span>
@@ -342,7 +344,7 @@
       <span class="arrow"><i class="fas fa-phone"></i></span>
     </a>
     
-    <!-- EMAIL BUTTON: Clean 'Send us an email' with custom subject/body -->
+    <!-- EMAIL BUTTON -->
     <div id="emailButtonContainer">
       <a href="#" id="smartEmailBtn" class="link-btn">
         <span><i class="fas fa-envelope"></i> Send us an email</span>
@@ -359,25 +361,11 @@
   <script>
     (function() {
       // ========================
-      // PROFILE PHOTO UPLOAD (with embedded default)
-      // The photo is now pre-embedded. Users can still click to replace.
+      // PROFILE PHOTO UPLOAD (click to change photo)
       // ========================
       const profileContainer = document.getElementById('profilePhotoContainer');
       const profileImg = document.getElementById('userProfileImg');
       const fallbackDiv = document.getElementById('fallbackAvatar');
-
-      // If you have an actual photo URL, replace the src below with your image.
-      // For now, we keep a professional AG monogram as embedded default.
-      // To use your real photo: replace the src with your image URL or base64.
-      // Example: profileImg.src = "https://yourdomain.com/your-photo.jpg";
-      
-      // NOTE: The image is already embedded inline in the HTML (SVG monogram).
-      // If you want to replace with your actual photo, uncomment and set path:
-      // profileImg.src = "YOUR_PHOTO_URL_HERE";
-      // profileImg.style.display = 'block';
-      // fallbackDiv.style.display = 'none';
-      
-      // For now, the embedded SVG shows "AG" stylishly. You can replace it by double-clicking the photo.
 
       function setProfileImage(file) {
         if (file && file.type.startsWith('image/')) {
@@ -431,8 +419,6 @@
 
       // ========================
       // EMAIL BUTTON with custom content
-      // Subject: "Inquiry for a new production work"
-      // Body: "Hello Abdurazak, I came across your portfolio and would like to get in touch. Best regards,"
       // ========================
       const emailBtn = document.getElementById('smartEmailBtn');
       const emailAddress = "Abdurazaqgorja@gmail.com";
