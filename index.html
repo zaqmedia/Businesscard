@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Abdurazak Gorja · Creative Director</title>
+  <!-- Font Awesome 6 (official icons for all platforms) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #F5F0E8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    /* Main card - elegant and clean */
+    .card {
+      background: white;
+      max-width: 520px;
+      width: 100%;
+      border-radius: 48px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(234, 227, 215, 0.5);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 35px 55px -20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Profile photo */
+    .profile-photo {
+      width: 108px;
+      height: 108px;
+      margin: 0 auto 1.2rem;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .photo-frame {
+      width: 100%;
+      height: 100%;
+      background: #E8E0D4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 3px solid #0B2B26;
+      box-shadow: 0 12px 24px rgba(11, 43, 38, 0.12);
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .photo-frame:active {
+      transform: scale(0.98);
+    }
+
+    @media (hover: hover) {
+      .photo-frame:hover {
+        transform: scale(1.02);
+        box-shadow: 0 16px 28px rgba(11, 43, 38, 0.18);
+      }
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-fallback {
+      background: #0B2B26;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: #F5F0E8;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Name + Title + Social Icons */
+    .name-title-section {
+      margin-bottom: 0.8rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #0B2B26;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .title {
+      color: #7D6E54;
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+    }
+
+    /* Social Icons Row - refined */
+    .social-icons-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .social-icon-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      background: #F5F0E8;
+      border-radius: 50%;
+      color: #0B2B26;
+      font-size: 1.4rem;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      border: 1px solid #EAE3D7;
+    }
+
+    .social-icon-circle:active {
+      transform: scale(0.94);
+      background: #e8e0d4;
+    }
+
+    @media (hover: hover) {
+      .social-icon-circle:hover {
+        background: #0B2B26;
+        color: white;
+        transform: translateY(-3px);
+        border-color: #0B2B26;
+      }
+    }
+
+    /* Main Action Buttons (Portfolio, Website, Resume, Contact, Email) */
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #F5F0E8;
+      padding: 0.95rem 1.3rem;
+      margin-bottom: 0.9rem;
+      border-radius: 80px;
+      text-decoration: none;
+      color: #0B2B26;
+      font-weight: 500;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid #EAE3D7;
+      min-height: 60px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-btn:active {
+      transform: scale(0.97);
+      background: #e8e0d4;
+    }
+
+    @media (hover: hover) {
+      .link-btn:hover {
+        background: #0B2B26;
+        color: white;
+        transform: translateY(-2px);
+        border-color: #0B2B26;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+      }
+      .link-btn:hover .arrow {
+        color: white;
+      }
+    }
+
+    .link-btn span {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1rem;
+    }
+
+    .link-btn i {
+      width: 1.6rem;
+      font-size: 1.3rem;
+      text-align: center;
+    }
+
+    .arrow {
+      font-size: 1rem;
+      opacity: 0.6;
+      transition: all 0.2s;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.6rem;
+      font-size: 0.7rem;
+      color: #9b8f7a;
+      border-top: 1px solid #EAE3D7;
+      padding-top: 1rem;
+      line-height: 1.5;
+    }
+
+    .footer a {
+      color: #0B2B26;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .footer a:hover {
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 450px) {
+      body { padding: 0.75rem; }
+      .card { padding: 1.5rem 1.2rem; border-radius: 36px; }
+      h1 { font-size: 1.6rem; }
+      .title { font-size: 0.78rem; }
+      .profile-photo { width: 88px; height: 88px; }
+      .social-icon-circle { width: 40px; height: 40px; font-size: 1.2rem; }
+      .link-btn { padding: 0.75rem 1rem; min-height: 54px; margin-bottom: 0.8rem; }
+      .link-btn span { gap: 10px; font-size: 0.9rem; }
+      .link-btn i { width: 1.4rem; font-size: 1.1rem; }
+    }
+
+    @media (min-width: 768px) {
+      .card { padding: 2.2rem 2rem; }
+      .profile-photo { width: 115px; height: 115px; }
+      h1 { font-size: 2.1rem; }
+      .link-btn { padding: 1rem 1.5rem; }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body { background: #1e1e1a; }
+      .card { background: #2c2c28; border-color: #3a3a36; }
+      h1 { color: #F5F0E8; }
+      .title { color: #c0b090; }
+      .social-icon-circle { background: #3a3a36; color: #F5F0E8; border-color: #4a4a46; }
+      .link-btn { background: #3a3a36; color: #F5F0E8; border-color: #4a4a46; }
+      .footer { color: #8a8a76; border-top-color: #3a3a36; }
+      .footer a { color: #F5F0E8; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card, .link-btn, .photo-frame, .social-icon-circle { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Profile photo upload area -->
+    <div class="profile-photo" id="profilePhotoContainer" role="button" tabindex="0" aria-label="Click to upload your profile photo">
+      <div class="photo-frame">
+        <img id="userProfileImg" src="" alt="Abdurazak Gorja profile" style="display: none;">
+        <div id="fallbackAvatar" class="avatar-fallback">AG</div>
+      </div>
+      <span class="visually-hidden">Click the profile photo to upload your picture</span>
+    </div>
+
+    <!-- Name + Title -->
+    <div class="name-title-section">
+      <h1>Abdurazak Gorja</h1>
+      <div class="title">Creative Director · Cinematographer · Video Editor</div>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="social-icons-row">
+      <a href="https://www.linkedin.com/in/abdurazaq-gorja-957235115" target="_blank" rel="noopener noreferrer" class="social-icon-circle" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://www.instagram.com/zaqgraphy/" target="_blank" rel="noopener noreferrer" class="social-icon-circle" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@zaqgraphy" target="_blank" rel="noopener noreferrer" class="social-icon-circle" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
+    
+    <!-- Portfolio Button -->
+    <a href="https://abdurazaq.carrd.co/" target="_blank" rel="noopener noreferrer" class="link-btn">
+      <span><i class="fas fa-folder-open"></i> Explore Portfolio</span>
+      <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+    </a>
+    
+    <!-- Website Button -->
+    <a href="https://zaqmedia.github.io/" target="_blank" rel="noopener noreferrer" class="link-btn">
+      <span><i class="fas fa-globe"></i> Visit Website</span>
+      <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+    </a>
+    
+    <!-- Resume Button -->
+    <a href="https://zaqmedia.github.io/Zaqresume/" target="_blank" rel="noopener noreferrer" class="link-btn">
+      <span><i class="fas fa-file-alt"></i> View Resume</span>
+      <span class="arrow"><i class="fas fa-external-link-alt"></i></span>
+    </a>
+
+    <!-- Contact: Phone (universal) -->
+    <a href="tel:+251921945331" class="link-btn">
+      <span><i class="fas fa-phone-alt"></i> Call or Save Contact</span>
+      <span class="arrow"><i class="fas fa-phone"></i></span>
+    </a>
+    
+    <!-- EMAIL BUTTON: Clean 'Send us an email' with custom subject/body -->
+    <div id="emailButtonContainer">
+      <a href="#" id="smartEmailBtn" class="link-btn">
+        <span><i class="fas fa-envelope"></i> Send us an email</span>
+        <span class="arrow"><i class="fas fa-paper-plane"></i></span>
+      </a>
+    </div>
+    
+    <div class="footer">
+      <i class="fas fa-qrcode"></i> One link — all my professional channels<br>
+      <a href="#" id="copyLinkBtn"><i class="fas fa-link"></i> Copy this page link</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ========================
+      // PROFILE PHOTO UPLOAD
+      // ========================
+      const profileContainer = document.getElementById('profilePhotoContainer');
+      const profileImg = document.getElementById('userProfileImg');
+      const fallbackDiv = document.getElementById('fallbackAvatar');
+
+      function setProfileImage(file) {
+        if (file && file.type.startsWith('image/')) {
+          if (file.size > 5 * 1024 * 1024) {
+            alert("Image is too large. Please choose an image under 5MB.");
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            profileImg.src = e.target.result;
+            profileImg.style.display = 'block';
+            fallbackDiv.style.display = 'none';
+            try {
+              localStorage.setItem('profilePhotoData', e.target.result);
+            } catch(err) {}
+          };
+          reader.readAsDataURL(file);
+        } else if (file) {
+          alert("Please select a valid image (JPG, PNG, GIF).");
+        }
+      }
+
+      try {
+        const savedPhoto = localStorage.getItem('profilePhotoData');
+        if (savedPhoto && savedPhoto.startsWith('data:image')) {
+          profileImg.src = savedPhoto;
+          profileImg.style.display = 'block';
+          fallbackDiv.style.display = 'none';
+        }
+      } catch(e) {}
+
+      profileContainer.addEventListener('click', () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/jpeg, image/png, image/gif, image/webp';
+        input.onchange = () => {
+          if (input.files && input.files[0]) setProfileImage(input.files[0]);
+        };
+        input.click();
+      });
+
+      profileContainer.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          profileContainer.click();
+        }
+      });
+      profileContainer.setAttribute('role', 'button');
+      profileContainer.setAttribute('tabindex', '0');
+
+      // ========================
+      // EMAIL BUTTON with custom content
+      // Subject: "Inquiry for a new production work"
+      // Body: "Hello Abdurazak, I came across your portfolio and would like to get in touch. Best regards,"
+      // ========================
+      const emailBtn = document.getElementById('smartEmailBtn');
+      const emailAddress = "Abdurazaqgorja@gmail.com";
+      
+      // Custom email content exactly as requested
+      const emailSubject = "Inquiry for a new production work";
+      const emailBody = "Hello Abdurazak,\n\nI came across your portfolio and would like to get in touch.\n\nBest regards,";
+      
+      const encodedSubject = encodeURIComponent(emailSubject);
+      const encodedBody = encodeURIComponent(emailBody);
+      
+      // Gmail web compose URL (clean, opens in browser)
+      const gmailWebLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${encodedSubject}&body=${encodedBody}`;
+      
+      // Native mailto: fallback (used on mobile/tablet)
+      const mailtoLink = `mailto:${emailAddress}?subject=${encodedSubject}&body=${encodedBody}`;
+
+      // Detect mobile devices (phones, tablets) — they handle mailto: best
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet|iPad|Android.*Mobile/i.test(navigator.userAgent);
+      const isTablet = /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
+      const isMobileOrTablet = isMobile || isTablet;
+
+      emailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        if (isMobileOrTablet) {
+          // On mobile/tablet: use mailto: to open native mail app or Gmail app
+          window.location.href = mailtoLink;
+        } else {
+          // On Desktop (Mac, Windows, Linux): open Gmail web version (clean, no app required)
+          window.open(gmailWebLink, '_blank');
+        }
+      });
+
+      // Optional: Provide a subtle tooltip for clarity
+      emailBtn.setAttribute('title', isMobileOrTablet ? 'Opens your email app' : 'Opens Gmail in your browser');
+
+      // ========================
+      // COPY PAGE LINK BUTTON
+      // ========================
+      const copyBtn = document.getElementById('copyLinkBtn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const currentUrl = window.location.href;
+          try {
+            await navigator.clipboard.writeText(currentUrl);
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Link copied!';
+            setTimeout(() => {
+              copyBtn.innerHTML = originalText;
+            }, 2000);
+          } catch (err) {
+            const textarea = document.createElement('textarea');
+            textarea.value = currentUrl;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Link copied!';
+            setTimeout(() => {
+              copyBtn.innerHTML = originalText;
+            }, 2000);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
