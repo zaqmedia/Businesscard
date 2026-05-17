@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   <title>Abdurazak Gorja · Creative Director</title>
   <!-- Font Awesome 6 (official icons for all platforms) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     /* ================================================================
        SF PRO DISPLAY FONT STACK - Optimized for ALL platforms
@@ -48,21 +48,6 @@
     .thin-italic {
       font-weight: 400;
       font-style: italic;
-    }
-
-    /* Fallback for systems without any modern fonts */
-    @supports (font-variation-settings: normal) {
-      * {
-        font-family: 
-          "SF Pro Display",
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          Roboto,
-          "Helvetica Neue",
-          Arial,
-          sans-serif;
-      }
     }
 
     /* ================================================================
@@ -341,7 +326,7 @@
     <!-- PROFILE PHOTO SECTION - Embedded from GitHub -->
     <div class="profile-photo" id="profilePhotoContainer" role="button" tabindex="0" aria-label="Click to upload your profile photo">
       <div class="photo-frame">
-        <img id="userProfileImg" src="https://raw.githubusercontent.com/zaqmedia/Zaqresume/main/abdurazak-profile.jpg" alt="Abdurazak Gorja profile" style="display: block;">
+        <img id="userProfileImg" src="https://raw.githubusercontent.com/zaqmedia/Zaqresume/main/abdurazak-profile.jpg" alt="Abdurazak Gorja profile" onerror="this.style.display='none'; document.getElementById('fallbackAvatar').style.display='flex';">
         <div id="fallbackAvatar" class="avatar-fallback" style="display: none;">AG</div>
       </div>
       <span class="visually-hidden">Click the profile photo to upload your picture</span>
@@ -392,8 +377,8 @@
     
     <!-- Email Button -->
     <div id="emailButtonContainer">
-      <a href="#" id="smartEmailBtn" class="link-btn">
-        <span><i class="fas fa-envelope"></i> Send us an email</span>
+      <a href="mailto:Abdurazaqgorja@gmail.com?subject=Inquiry%20for%20a%20new%20production%20work&body=Hello%20Abdurazak%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20get%20in%20touch.%0A%0ABest%20regards%2C" id="smartEmailBtn" class="link-btn">
+        <span><i class="fas fa-envelope"></i> Send me an email</span>
         <span class="arrow"><i class="fas fa-paper-plane"></i></span>
       </a>
     </div>
@@ -424,6 +409,8 @@
             profileImg.src = e.target.result;
             profileImg.style.display = 'block';
             if (fallbackDiv) fallbackDiv.style.display = 'none';
+            // Remove the onerror handler since we're using a local data URL
+            profileImg.onerror = null;
             try {
               localStorage.setItem('profilePhotoData', e.target.result);
             } catch(err) {}
@@ -441,6 +428,8 @@
           profileImg.src = savedPhoto;
           profileImg.style.display = 'block';
           if (fallbackDiv) fallbackDiv.style.display = 'none';
+          // Remove the onerror handler since we're using a local data URL
+          profileImg.onerror = null;
         }
       } catch(e) {}
 
@@ -460,8 +449,6 @@
           profileContainer.click();
         }
       });
-      profileContainer.setAttribute('role', 'button');
-      profileContainer.setAttribute('tabindex', '0');
 
       // ========================
       // EMAIL BUTTON - Cross-platform
@@ -487,7 +474,7 @@
         if (isMobileOrTablet) {
           window.location.href = mailtoLink;
         } else {
-          window.open(gmailWebLink, '_blank');
+          window.open(gmailWebLink, '_blank', 'noopener,noreferrer');
         }
       });
 
@@ -509,17 +496,13 @@
               copyBtn.innerHTML = originalText;
             }, 2000);
           } catch (err) {
-            const textarea = document.createElement('textarea');
-            textarea.value = currentUrl;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
+            // Clipboard API failed, show manual copy instructions
             const originalText = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check"></i> Link copied!';
+            copyBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Could not copy automatically';
             setTimeout(() => {
               copyBtn.innerHTML = originalText;
-            }, 2000);
+            }, 3000);
+            console.error('Failed to copy link:', err);
           }
         });
       }
